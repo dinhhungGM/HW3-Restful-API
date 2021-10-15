@@ -156,11 +156,11 @@ app.patch("/api/password", (req, res) => {
           console.log(err);
           return res.status(500).json({
             success: false,
-            message: "Data is not valid, Please check it again",
+            message: "Internal Server Error",
             err,
           });
         }
-        res.send(data);
+        res.status(200).json({success: true, message: 'password was changed successfully !!'});
       });
     }
   });
