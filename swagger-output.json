@@ -16,7 +16,7 @@
   "paths": {
     "/api/users": {
       "get": {
-        "tags": [],
+        "tags": ["GET ALL USERS"],
         "description": "",
         "parameters": [],
         "responses": {
@@ -26,7 +26,7 @@
         }
       },
       "post": {
-        "tags": [],
+        "tags": ["CREATE USER"],
         "description": "",
         "parameters": [
           {
@@ -55,9 +55,9 @@
         }
       }
     },
-    "/api/auth": {
+    "/api/auth/login": {
       "post": {
-        "tags": [],
+        "tags": ["LOGIN"],
         "description": "",
         "parameters": [
           {
@@ -77,6 +77,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "400": {
             "description": "Bad Request"
           },
@@ -88,7 +91,7 @@
     },
     "/api/password": {
       "patch": {
-        "tags": [],
+        "tags": ["CHANGE PASSWORD"],
         "description": "",
         "parameters": [
           {
@@ -108,6 +111,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -116,7 +122,7 @@
     },
     "/api/transact": {
       "post": {
-        "tags": [],
+        "tags": ["TRANSACTION (WITHDAW / DEPOSIT)"],
         "description": "",
         "parameters": [
           {

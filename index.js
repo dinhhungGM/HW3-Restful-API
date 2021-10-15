@@ -4,16 +4,15 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const argon2 = require("argon2");
-const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./swagger-output.json');
-const jwt = require('jsonwebtoken')
+const swaggerUi = require("swagger-ui-express");
+const swaggerDocument = require("./swagger-output.json");
+const jwt = require("jsonwebtoken");
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
 
 const UserSchema = new Schema(
   {
@@ -54,7 +53,9 @@ TransactionSchema.pre("save", async function (next) {
     const user = await User.findById(transact.userId);
     if (transact.type === "withdraw") {
       if (user.balance < transact.money) {
-         return next(new Error("Cannot withdraw with money greater than balance"));
+        return next(
+          new Error("Cannot withdraw with money greater than balance")
+        );
       }
       user.balance = user.balance - transact.money;
       user.save();
@@ -85,7 +86,6 @@ const connectAndRetry = async () => {
 
 connectAndRetry();
 
-
 app.get("/api/users", async (req, res) => {
   try {
     return res.json({ success: true, users: await User.find() });
@@ -114,22 +114,33 @@ app.post("/api/users", async (req, res) => {
   }
 });
 
-app.post("/api/auth", async (req, res) => {
+app.post("/api/auth/login", async (req, res) => {
   const { username, password } = req.body;
   try {
     const user = await User.findOne({ username });
-    if(!user){
+    if (!user) {
       return res
         .status(400)
-        .json({ success: false, message: "username or password is not correct" });
+        .json({
+          success: false,
+          message: "username or password is not correct",
+        });
     }
     if (!(await argon2.verify(user.password, password))) {
       return res
         .status(400)
-        .json({ success: false, message: "username or password is not correct" });
-    } 
-      return res.status(200).json({ success: true, message: "login successful", token: jwt.sign({sub: user._id}) });
-    
+        .json({
+          success: false,
+          message: "username or password is not correct",
+        });
+    }
+    return res
+      .status(200)
+      .json({
+        success: true,
+        message: "login successful",
+        token: jwt.sign({ sub: user._id }, "secret"),
+      });
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -160,7 +171,12 @@ app.patch("/api/password", (req, res) => {
             err,
           });
         }
-        res.status(200).json({success: true, message: 'password was changed successfully !!'});
+        res
+          .status(200)
+          .json({
+            success: true,
+            message: "password was changed successfully !!",
+          });
       });
     }
   });
