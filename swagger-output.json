@@ -5,7 +5,7 @@
     "description": "Description",
     "version": "1.0.0"
   },
-  "host": "https://hw3-restful-api.herokuapp.com",
+  "host": "hw3-restful-api.herokuapp.com",
   "basePath": "/",
   "tags": [],
   "schemes": [
