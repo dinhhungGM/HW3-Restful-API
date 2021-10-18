@@ -186,6 +186,10 @@ app.post("/api/transact", (req, res) => {
   const { userId, money, type } = req.body;
   new Transaction({ userId, money, type }).save((err, transaction) => {
     if (err) {
+      if(err.message){
+
+        console.log(err.message);
+      }
       return res.status(500).json(err);
     } else {
       return res.status(201).json({ success: true, transaction });

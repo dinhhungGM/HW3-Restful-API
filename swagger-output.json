@@ -5,10 +5,11 @@
     "description": "Description",
     "version": "1.0.0"
   },
-  "host": "localhost:4000",
+  "host": "https://hw3-restful-api.herokuapp.com",
   "basePath": "/",
   "tags": [],
   "schemes": [
+    "https",
     "http"
   ],
   "consumes": [],
@@ -16,7 +17,7 @@
   "paths": {
     "/api/users": {
       "get": {
-        "tags": ["GET ALL USERS"],
+        "tags": [],
         "description": "",
         "parameters": [],
         "responses": {
@@ -26,7 +27,7 @@
         }
       },
       "post": {
-        "tags": ["CREATE USER"],
+        "tags": [],
         "description": "",
         "parameters": [
           {
@@ -57,7 +58,7 @@
     },
     "/api/auth/login": {
       "post": {
-        "tags": ["LOGIN"],
+        "tags": [],
         "description": "",
         "parameters": [
           {
@@ -91,7 +92,7 @@
     },
     "/api/password": {
       "patch": {
-        "tags": ["CHANGE PASSWORD"],
+        "tags": [],
         "description": "",
         "parameters": [
           {
@@ -122,7 +123,7 @@
     },
     "/api/transact": {
       "post": {
-        "tags": ["TRANSACTION (WITHDAW / DEPOSIT)"],
+        "tags": [],
         "description": "",
         "parameters": [
           {

@@ -5,8 +5,9 @@ const doc = {
     title: 'Xuan Hung API',
     description: 'Description',
   },
-  host: 'localhost:4000',
-  schemes: ['http'],
+  host: 'https://hw3-restful-api.herokuapp.com',
+  // host: 'http://localhost:4000',
+  schemes: ['https', 'http'],
 };
 
 const outputFile = './swagger-output.json';
